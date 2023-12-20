@@ -1,5 +1,5 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-export const theme = createTheme({
+import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material/styles";
+export let theme = createTheme({
   palette: {
     primary: {
       main: "#007026",
@@ -20,9 +20,28 @@ export const theme = createTheme({
     },
 
     title: {
-        fontFamily: "Merriweather",
+      fontFamily: "Merriweather",
+    },
 
-    }
+    h1: {
+        fontSize: "56px",
+        fontFamily: "Merriweather",
+      },
+    h2: {
+      fontSize: "48px",
+      fontFamily: "Merriweather",
+    },
+    h3: {
+      fontSize: "40px",
+      fontFamily: "Merriweather",
+    },
+
+    h4: {
+      fontSize: "32px",
+      fontFamily: "Merriweather",
+    },
   },
   shadows: "none",
 });
+
+theme = responsiveFontSizes(theme);
