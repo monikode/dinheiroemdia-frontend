@@ -5,6 +5,11 @@ import App from "./App";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
+import { Login } from "./pages/public/login";
+import { SignUp } from "./pages/public/signup";
+import { Dashboard } from "./pages/protected/dashboard";
+import { PrivateContainer } from "./pages/protected/components/container";
+import { Perfil } from "./pages/protected/perfil";
 
 const router = createBrowserRouter([
   {
@@ -17,19 +22,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <div>Hello world!</div>,
+    element: <Login />,
   },
   {
     path: "/cadastro",
-    element: <div>Hello world!</div>,
+    element: <SignUp />,
   },
   {
     path: "/home",
-    element: <div>Hello world!</div>,
+    element: (
+      <PrivateContainer>
+        <Dashboard />
+      </PrivateContainer>
+    ),
   },
   {
     path: "/perfil",
-    element: <div>Hello world!</div>,
+    element: (
+      <PrivateContainer>
+        <Perfil />
+      </PrivateContainer>
+    ),
   },
   {
     path: "/categorias",

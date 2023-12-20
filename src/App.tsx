@@ -154,7 +154,6 @@ function App() {
 
         <hr />
 
-        <LinearProgress variant="determinate" value={100 / 3} />
       </header>
     </div>
   );

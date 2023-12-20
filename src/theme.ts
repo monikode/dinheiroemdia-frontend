@@ -1,4 +1,8 @@
-import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material/styles";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material/styles";
 export let theme = createTheme({
   palette: {
     primary: {
@@ -24,9 +28,9 @@ export let theme = createTheme({
     },
 
     h1: {
-        fontSize: "56px",
-        fontFamily: "Merriweather",
-      },
+      fontSize: "56px",
+      fontFamily: "Merriweather",
+    },
     h2: {
       fontSize: "48px",
       fontFamily: "Merriweather",
@@ -42,6 +46,14 @@ export let theme = createTheme({
     },
   },
   shadows: "none",
+
+  components: {
+    MuiTypography: {
+      defaultProps: {
+        padding: 0,
+      },
+    },
+  },
 });
 
 theme = responsiveFontSizes(theme);
