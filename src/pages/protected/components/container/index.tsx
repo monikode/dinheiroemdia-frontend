@@ -1,5 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import { useState } from "react";
+import "./index.css"
 
 export function PrivateContainer(props) {
   const [sidebarWidth, setSidebarWidth] = useState(200);
@@ -12,9 +13,15 @@ export function PrivateContainer(props) {
           minHeight: "100vh",
           boxSizing: "border-box",
           padding: "24px 32px",
+          height: "100%"
         }}
+
+        className="sidebar"
       >
-        <Grid container item direction={"column"}>
+        <Grid container item direction={"column"}  sx={{
+          
+          height: "100%"
+        }}>
           <Grid item xs={1}>
             DD
           </Grid>
@@ -37,9 +44,12 @@ export function PrivateContainer(props) {
     <Grid
       container
       direction={"row"}
-      sx={{ width: "100vw", minHeight: "100vh" }}
+      sx={{ width: "100vw", minHeight: "100vh"}}
     >
-      <Grid item xs={"auto"}>
+      <Grid item xs={"auto"}
+      
+      sx={{  minHeight: "100vh" }}
+      >
         <Sidebar />
       </Grid>
 

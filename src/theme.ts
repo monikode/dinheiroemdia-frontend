@@ -44,6 +44,10 @@ export let theme = createTheme({
       fontSize: "32px",
       fontFamily: "Merriweather",
     },
+    h5: {
+      fontSize: "24px",
+      fontFamily: "Merriweather",
+    },
   },
   shadows: "none",
 
