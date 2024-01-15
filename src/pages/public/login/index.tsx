@@ -1,6 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import { StyledTextField } from "../../../shared/components/text-field";
 import { StyledButton } from "../../../shared/components/button";
+import { Link } from "../../../../node_modules/react-router-dom/dist/index";
 
 export function Login() {
   return (
@@ -48,7 +49,8 @@ export function Login() {
           <Grid item>
             <hr />
           </Grid>
-          <Grid item>Cadastre-se</Grid>
+          <Grid item>
+            <Link to="/cadastro">Cadastre-se</Link></Grid>
         </Grid>
         <Grid item xs={1} flexShrink={0}></Grid>
       </Grid>

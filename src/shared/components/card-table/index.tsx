@@ -4,8 +4,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import "./index.css"
 import { StyledCard } from "../card/index";
 import FastfoodIcon from '@mui/icons-material/Fastfood';
+import { useNavigate } from "react-router-dom"; 
 
 function CardItem() {
+    
     return <StyledCard className="card-item">
         <Grid container direction="column" alignItems="center">
             <Grid item alignItems="center"> <FastfoodIcon className="icon" /></Grid>
@@ -17,6 +19,13 @@ function CardItem() {
     </StyledCard>
 }
 export function CardTable() {
+    const navigate = useNavigate();
+    const link="/categoria/"
+
+    const click = () => {
+        navigate(link+"10")
+    }
+
     return (
         <Grid container direction={"column"} flexWrap={"nowrap"}>
 
@@ -29,7 +38,7 @@ export function CardTable() {
 
                 {
 
-                    Array(100).fill((<Box item xs={'auto'} className="grid-item" >
+                    Array(100).fill((<Box item xs={'auto'} className="grid-item" onClick={()=>  navigate(link+"10")}>
                         <CardItem></CardItem>
                     </Box>))}
 

@@ -4,6 +4,8 @@ import { StyledButton } from "../../../shared/components/button";
 import { useState } from "react";
 import { LastPage } from "../../../../node_modules/@mui/icons-material/index";
 import { userOperations } from "../../../api/user";
+import { Link as StyledLink } from "../../../../node_modules/@mui/material/index";
+import { Link } from "../../../../node_modules/react-router-dom/dist/index";
 
 export function SignUp() {
   const [name, setName] = useState("")
@@ -13,10 +15,10 @@ export function SignUp() {
   const [password, setPassword] = useState("")
   const [passwordRepeat, setPasswordRepeat] = useState("")
 
-  function signUp () {
-    userOperations.create({name, lastName, email, birthday}, password).then(res=>{
+  function signUp() {
+    userOperations.create({ name, lastName, email, birthday }, password).then(res => {
       alert("criou")
-    }).catch(e=>{
+    }).catch(e => {
       alert("nao criou")
 
     })
@@ -53,11 +55,11 @@ export function SignUp() {
                 <StyledTextField label="Nome" fullWidth value={name} onChange={ev => setName(ev.target.value)} />
               </Grid>
               <Grid item xs={6}>
-                <StyledTextField label="Sobrenome" fullWidth  value={lastName} onChange={ev => setLastName(ev.target.value)}/>
+                <StyledTextField label="Sobrenome" fullWidth value={lastName} onChange={ev => setLastName(ev.target.value)} />
               </Grid>
             </Grid>
             <Grid item>
-              <StyledTextField label="E-mail" fullWidth value={email} onChange={ev => setEmail(ev.target.value)} type="email"/>
+              <StyledTextField label="E-mail" fullWidth value={email} onChange={ev => setEmail(ev.target.value)} type="email" />
             </Grid>
           </Grid>
 
@@ -86,7 +88,7 @@ export function SignUp() {
           <Grid item>
             <hr />
           </Grid>
-          <Grid item>Cadastre-se</Grid>
+          <Grid item>Já possui uma conta? <Link to="/login">Clique para entrar. </Link></Grid>
         </Grid>
         <Grid item xs={1} flexShrink={0}></Grid>
       </Grid>
