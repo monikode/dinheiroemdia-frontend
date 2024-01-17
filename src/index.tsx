@@ -12,6 +12,7 @@ import { PrivateContainer } from "./pages/protected/components/container";
 import { Perfil } from "./pages/protected/perfil";
 import { Categories } from "./pages/protected/category/list/index";
 import { Category } from "./pages/protected/category/view/index";
+import { Accounts } from "./pages/protected/accounts/list/index";
 
 const router = createBrowserRouter([
   {
@@ -61,7 +62,7 @@ const router = createBrowserRouter([
   {
     path: "/contas",
     element: <PrivateContainer>
-    <Categories/>
+    <Accounts/>
   </PrivateContainer>,
   },
   {
