@@ -13,7 +13,7 @@ export function Categories() {
     percentage: 5,
 
   }))
-  const [openDialog, setOpenDialog] = useState(true)
+  const [openDialog, setOpenDialog] = useState(false)
   const onCreate = () => {
     setOpenDialog(true)
   }

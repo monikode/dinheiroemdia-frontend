@@ -38,7 +38,7 @@ const RoundDialog = styled(Dialog)(({ theme }) => ({
 
 export default function StyledDialog(props: any) {
     const { openProps, onConfirm, onClose } = props;
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
