@@ -1,14 +1,14 @@
 import { Grid, Typography } from "@mui/material";
 import { useState } from "react";
-import { Button } from "../../../../../node_modules/@mui/material/index";
 import { CardItemProps, CardTable } from "../../../../shared/components/card-table/index";
 import StyledDialog from "../../../../shared/components/dialog/index";
-import { CategoryForm } from "../form/index";
+import { CategoryForm } from "../../category/form/index";
+import { AccountForm } from "../form/index";
 
-export function Categories() {
+export function Accounts() {
   const [list, setList] = useState<CardItemProps[]>(Array(10).fill({
     id: 1,
-    name: "Alimentação",
+    name: "Banco Inter",
     consumption: 100.00,
     percentage: 5,
 
@@ -24,14 +24,14 @@ export function Categories() {
   return (
     <Grid container direction={"column"} flexWrap={"nowrap"}>
       <Grid item xs={6}>
-        <Typography variant="h4">Categorias</Typography>
+        <Typography variant="h4">Contas</Typography>
       </Grid>
 
       <Grid item xs={6}>
         <CardTable onCreate={onCreate} list={list} itemRoute="/categoria/"></CardTable>
       </Grid>
-      <StyledDialog openProps={openDialog} onClose={onClose} onConfirm={onClose} title="Nova Categoria">
-        <CategoryForm></CategoryForm></StyledDialog>
+      <StyledDialog openProps={openDialog} onClose={onClose} onConfirm={onClose} title="Nova Conta">
+        <AccountForm></AccountForm></StyledDialog>
     </Grid>
   );
 }

@@ -1,0 +1,50 @@
+.container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-areas: 'sidebar navbar''sidebar main';
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr;
+}
+
+.container .sidebar {
+    grid-area: sidebar;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.container .sidebar>* {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    color: #fff;
+
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 24px 32px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.container .sidebar .links {
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.container .navbar {
+    grid-area: navbar;
+}
+
+.container .content {
+    grid-area: main;
+    box-sizing: border-box;
+}

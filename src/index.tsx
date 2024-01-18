@@ -10,6 +10,9 @@ import { SignUp } from "./pages/public/signup";
 import { Dashboard } from "./pages/protected/dashboard";
 import { PrivateContainer } from "./pages/protected/components/container";
 import { Perfil } from "./pages/protected/perfil";
+import { Categories } from "./pages/protected/category/list/index";
+import { Category } from "./pages/protected/category/view/index";
+import { Accounts } from "./pages/protected/accounts/list/index";
 
 const router = createBrowserRouter([
   {
@@ -46,15 +49,21 @@ const router = createBrowserRouter([
   },
   {
     path: "/categorias",
-    element: <div>Hello world!</div>,
+    element: <PrivateContainer>
+    <Categories/>
+  </PrivateContainer>,
   },
   {
     path: "/categoria/:id",
-    element: <div>Hello world!</div>,
+    element: <PrivateContainer>
+    <Category/>
+  </PrivateContainer>,
   },
   {
     path: "/contas",
-    element: <div>Hello world!</div>,
+    element: <PrivateContainer>
+    <Accounts/>
+  </PrivateContainer>,
   },
   {
     path: "/conta/:id",

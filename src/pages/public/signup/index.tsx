@@ -1,8 +1,28 @@
 import { Grid, LinearProgress, Typography } from "@mui/material";
 import { StyledTextField } from "../../../shared/components/text-field";
 import { StyledButton } from "../../../shared/components/button";
+import { useState } from "react";
+import { LastPage } from "../../../../node_modules/@mui/icons-material/index";
+import { userOperations } from "../../../api/user";
+import { Link as StyledLink } from "../../../../node_modules/@mui/material/index";
+import { Link } from "../../../../node_modules/react-router-dom/dist/index";
 
 export function SignUp() {
+  const [name, setName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [birthday, setBirthday] = useState(new Date())
+  const [password, setPassword] = useState("")
+  const [passwordRepeat, setPasswordRepeat] = useState("")
+
+  function signUp() {
+    userOperations.create({ name, lastName, email, birthday }, password).then(res => {
+      alert("criou")
+    }).catch(e => {
+      alert("nao criou")
+
+    })
+  }
   return (
     <Grid container sx={{ minHeight: "100vh" }}>
       <Grid
@@ -32,36 +52,35 @@ export function SignUp() {
           <Grid item container direction={"column"} rowSpacing={2}>
             <Grid container item columnSpacing={2}>
               <Grid item xs={6}>
-                <StyledTextField label="Nome" fullWidth />
+                <StyledTextField label="Nome" fullWidth value={name} onChange={ev => setName(ev.target.value)} />
               </Grid>
-
               <Grid item xs={6}>
-                <StyledTextField label="Sobrenome" fullWidth />
+                <StyledTextField label="Sobrenome" fullWidth value={lastName} onChange={ev => setLastName(ev.target.value)} />
               </Grid>
             </Grid>
             <Grid item>
-              <StyledTextField label="E-mail" fullWidth />
+              <StyledTextField label="E-mail" fullWidth value={email} onChange={ev => setEmail(ev.target.value)} type="email" />
             </Grid>
           </Grid>
 
           <Grid container item columnSpacing={2}>
             <Grid item xs={12}>
-              <StyledTextField label="Data Nasc." fullWidth />
+              <StyledTextField label="Data Nasc." fullWidth value={birthday} onChange={ev => setName(ev.target.value)} />
             </Grid>
           </Grid>
 
           <Grid container item direction={"column"} columnSpacing={2}>
             <Grid item xs={6}>
-              <StyledTextField label="Senha" fullWidth />
+              <StyledTextField label="Senha" fullWidth value={password} onChange={ev => setPassword(ev.target.value)} />
             </Grid>
 
             <Grid item xs={6}>
-              <StyledTextField label="Repita senha" fullWidth />
+              <StyledTextField label="Repita senha" fullWidth value={passwordRepeat} onChange={ev => setPasswordRepeat(ev.target.value)} />
             </Grid>
           </Grid>
 
           <Grid item>
-            <StyledButton variant="contained" fullWidth>
+            <StyledButton variant="contained" fullWidth onClick={signUp}>
               Próximo
             </StyledButton>
           </Grid>
@@ -69,7 +88,7 @@ export function SignUp() {
           <Grid item>
             <hr />
           </Grid>
-          <Grid item>Cadastre-se</Grid>
+          <Grid item>Já possui uma conta? <Link to="/login">Clique para entrar. </Link></Grid>
         </Grid>
         <Grid item xs={1} flexShrink={0}></Grid>
       </Grid>
