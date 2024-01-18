@@ -14,7 +14,7 @@ export function Login() {
         sx={{ padding: "56px 80px" }}
       >
         <Grid item xs={1}>
-          Dinheiro em Dia
+          {/* Dinheiro em Dia */}
         </Grid>
         <Grid
           item
