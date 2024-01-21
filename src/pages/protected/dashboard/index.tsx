@@ -65,7 +65,14 @@ export function Dashboard() {
           </Grid>
         </Grid>
       </Grid>
-      <StyledCard>Conta</StyledCard>
+      <StyledCard>
+        <Box className="filter">
+          <Box>Conta</Box>
+          <Box>Categoria</Box>
+          <Box> Data de Inicio</Box>
+          <Box>Data de Fim</Box>
+        </Box>
+      </StyledCard>
 
       <Box className="charts">
         <StyledCard className="spents">

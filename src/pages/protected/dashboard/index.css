@@ -2,6 +2,18 @@
     margin-bottom: 72px;
 }
 
+.dashboard .filter {
+    display: flex;
+  
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .dashboard .filter > *{
+   flex: 1;
+  }
+
 .dashboard .charts {
   display: flex;
   flex-direction: column;
