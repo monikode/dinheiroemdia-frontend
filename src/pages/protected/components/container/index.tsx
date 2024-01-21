@@ -32,7 +32,6 @@ export function PrivateContainer(props) {
 
   return (
     <Box
-      sx={{ width: "100vw", minHeight: "100vh" }}
       className="container"
     >
       <Box className="sidebar" >

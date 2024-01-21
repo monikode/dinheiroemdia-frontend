@@ -1,0 +1,28 @@
+.dashboard {
+    margin-bottom: 72px;
+}
+
+.dashboard .charts {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+.dashboard .hor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.dashboard .hor > * {
+  flex: 1;
+
+  min-width: 300px;
+}
+
+.dashboard .hor .vert {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

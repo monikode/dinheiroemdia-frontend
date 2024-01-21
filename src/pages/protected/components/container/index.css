@@ -4,6 +4,7 @@
     grid-template-areas: 'sidebar navbar''sidebar main';
     grid-template-columns: 200px 1fr;
     grid-template-rows: auto 1fr;
+    width: 100%;
 }
 
 .container .sidebar {

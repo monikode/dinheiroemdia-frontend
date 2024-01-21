@@ -53,8 +53,8 @@ export let theme = createTheme({
       fontSize: "24px",
       fontFamily: "Merriweather",
     },
-    shadows: "none",
   },
+  shadows: "none",
 
   components: {
     MuiTypography: {
