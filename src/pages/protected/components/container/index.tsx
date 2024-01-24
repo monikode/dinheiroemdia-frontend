@@ -1,8 +1,14 @@
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { useState } from "react";
-import "./index.css"
+import "./index.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { StyledButton } from "../../../../shared/components/button";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
 
 export function PrivateContainer(props) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [sidebarWidth, setSidebarWidth] = useState(200);
   function Sidebar() {
     return (
@@ -12,41 +18,53 @@ export function PrivateContainer(props) {
           width: `${sidebarWidth}px`,
         }}
       >
-
-        <Box className="icon">
-          DD
-        </Box>
+        <Box className="icon">DD</Box>
         <Box className="links">
-          <Box >Visão Geral</Box>
-          <Box >Categorias</Box>
-          <Box >Contas</Box>
+          <Box
+            className={location.pathname.includes("/home") ? "active" : ""}
+            onClick={() => navigate("/home")}
+          >
+            Visão Geral
+          </Box>
+          <Box
+            className={location.pathname.includes("/categoria") ? "active" : ""}
+            onClick={() => navigate("/categorias")}
+          >
+            Categorias
+          </Box>
+          <Box
+            className={location.pathname.includes("/conta") ? "active" : ""}
+            onClick={() => navigate("/contas")}
+          >
+            Contas
+          </Box>
         </Box>
 
         <Box className="logout">
-          Sair
+          <StyledButton variant="contained">
+            <LogoutIcon className="icon"></LogoutIcon>Sair
+          </StyledButton>
         </Box>
-
       </Box>
     );
   }
 
   return (
-    <Box
-      sx={{ width: "100vw", minHeight: "100vh" }}
-      className="container"
-    >
-      <Box className="sidebar" >
+    <Box className="container">
+      <Box className="sidebar">
         <Sidebar />
-
       </Box>
-      <Box item xs={1} className="navbar">
-        navbar
+      <Box className="navbar">
+        <IconButton size="large" onClick={()=>navigate("/perfil")}>
+          <AccountCircleTwoToneIcon fontSize="inherit" />
+        </IconButton>
       </Box>
       <Box
-        item
-        container
-        xs={10}
-        sx={{ backgroundColor: "#F2F4F8", padding: "3rem 4rem", height: "100%" }}
+        sx={{
+          backgroundColor: "#F2F4F8",
+          padding: "3rem 4rem",
+          height: "100%",
+        }}
         className="content"
       >
         {props.children}

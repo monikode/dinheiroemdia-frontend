@@ -3,6 +3,7 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material/styles";
+
 export let theme = createTheme({
   palette: {
     primary: {
@@ -22,7 +23,6 @@ export let theme = createTheme({
     button: {
       textTransform: "none",
     },
-
     title: {
       fontFamily: "Merriweather",
     },
@@ -44,6 +44,11 @@ export let theme = createTheme({
       fontSize: "32px",
       fontFamily: "Merriweather",
     },
+
+    h6: {
+      fontWeight: 500,
+    },
+
     h5: {
       fontSize: "24px",
       fontFamily: "Merriweather",

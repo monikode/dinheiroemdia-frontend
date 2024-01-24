@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
 import { Login } from "./pages/public/login";
@@ -17,7 +17,7 @@ import { Accounts } from "./pages/protected/accounts/list/index";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element:  <Navigate to="/login" replace={true} />,
   },
   {
     path: "/design-system",
