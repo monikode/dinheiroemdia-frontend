@@ -16,8 +16,8 @@ export const userOperations = {
     create: (user: User, password: string) => 
         axiosInstance.post(`/users/register/`, { ...user, password })
   ,
-    login: () =>
-        axiosInstance.post(`/users/login/`, data),
+    login: (email:string, password :string) =>
+        axiosInstance.post(`/users/login/`, {email, password}),
     //   update: (id: number, data: UserPermission) =>
     //     axiosInstance.patch(`/users/${id}`, data),
 
