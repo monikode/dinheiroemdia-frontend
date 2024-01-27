@@ -2,8 +2,24 @@ import { Grid, Typography } from "@mui/material";
 import { StyledTextField } from "../../../shared/components/text-field";
 import { StyledButton } from "../../../shared/components/button";
 import { Link } from "../../../../node_modules/react-router-dom/dist/index";
+import { userOperations } from "../../../api/user";
+import { useState } from "react";
+
 
 export function Login() {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  function login() {
+    userOperations.login(email, password).then(res => {
+      alert("criou")
+    }).catch(e => {
+      alert("nao criou")
+
+    })
+  }
+
   return (
     <Grid container sx={{ minHeight: "100vh" }}>
       <Grid item xs={6} sx={{ backgroundColor: "primary.main" }}></Grid>
@@ -32,16 +48,16 @@ export function Login() {
 
           <Grid item container direction={"column"} rowSpacing={2}>
             <Grid item>
-              <StyledTextField label="E-mail" fullWidth />
+              <StyledTextField label="E-mail" fullWidth value={email} onChange={ev => setEmail(ev.target.value)} type="email" />
             </Grid>
             <Grid item>
-              <StyledTextField label="Nome" fullWidth />
+              <StyledTextField label="Senha" fullWidth value={password} onChange={ev => setPassword(ev.target.value)} type="password" />
             </Grid>
 
             <Grid item>Lembrar de mim</Grid>
           </Grid>
           <Grid item>
-            <StyledButton variant="contained" fullWidth>
+            <StyledButton variant="contained" fullWidth onClick={()=>login()}>
               Entrar
             </StyledButton>
           </Grid>
