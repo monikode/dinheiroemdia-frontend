@@ -5,7 +5,7 @@ import { useState } from "react";
 import { LastPage } from "../../../../node_modules/@mui/icons-material/index";
 import { userOperations } from "../../../api/user";
 import { Link as StyledLink } from "../../../../node_modules/@mui/material/index";
-import { Link } from "../../../../node_modules/react-router-dom/dist/index";
+import { Link, useNavigate } from "../../../../node_modules/react-router-dom/dist/index";
 
 export function SignUp() {
   const [name, setName] = useState("")
@@ -14,10 +14,12 @@ export function SignUp() {
   const [birthday, setBirthday] = useState(new Date())
   const [password, setPassword] = useState("")
   const [passwordRepeat, setPasswordRepeat] = useState("")
+  const navigate = useNavigate()
+
 
   function signUp() {
     userOperations.create({ name, lastName, email, birthday }, password).then(res => {
-      alert("criou")
+      navigate("/home")
     }).catch(e => {
       alert("nao criou")
 
