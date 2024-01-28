@@ -20,6 +20,7 @@ export function Categories() {
   };
 
   const onClose = () => {
+    setName("")
     setOpenDialog(false);
   };
 
@@ -58,6 +59,7 @@ export function Categories() {
             onUpdate: () => {
               setOpenDialog(true);
               setCatSelected(item.id);
+              setName(item.name)
             },
           };
         })
