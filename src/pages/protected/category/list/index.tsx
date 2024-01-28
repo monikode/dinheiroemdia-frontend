@@ -9,11 +9,13 @@ import StyledDialog from "../../../../shared/components/dialog/index";
 import { CategoryForm } from "../form/index";
 import { StyledTextField } from "../../../../shared/components/text-field";
 import { categoryOperations } from "../../../../api/category";
+import { ColorPicker } from "../../../../shared/components/color-picker";
 
 export function Categories() {
   const [list, setList] = useState<CardItemProps[]>([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [name, setName] = useState("");
+  const [color, setColor] = useState("");
   const [catSelected, setCatSelected] = useState(-1);
   const onCreate = () => {
     setOpenDialog(true);
@@ -21,19 +23,20 @@ export function Categories() {
 
   const onClose = () => {
     setName("")
+    setColor("");
     setOpenDialog(false);
   };
 
   const onConfirm = () => {
     if (catSelected >= 0) {
-      categoryOperations.update(catSelected, name, "#8246AE", "fast-food").then((res) => {
+      categoryOperations.update(catSelected, name, color, "fast-food").then((res) => {
         getList();
         setCatSelected(-1);
         setOpenDialog(false);
         setName("")
       });
     } else {
-      categoryOperations.create(name, "#8246AE", "fast-food").then((res) => {
+      categoryOperations.create(name, color, "fast-food").then((res) => {
         getList();
         setOpenDialog(false);
         setName("")
@@ -59,6 +62,7 @@ export function Categories() {
             onUpdate: () => {
               setOpenDialog(true);
               setCatSelected(item.id);
+              setColor(item.color);
               setName(item.name)
             },
           };
@@ -96,6 +100,7 @@ export function Categories() {
           value={name}
           onChange={(ev) => setName(ev.target.value)}
         />
+        <ColorPicker label="Cor" value={color} onChange={ev=>setColor(ev.target.value)}></ColorPicker>
       </StyledDialog>
     </Grid>
   );
