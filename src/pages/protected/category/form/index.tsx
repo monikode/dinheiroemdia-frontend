@@ -5,11 +5,6 @@ export function CategoryForm() {
     return (
         <Box>
 
-            <StyledTextField
-                id="outlined-basic"
-                label="Nome"
-                variant="outlined"
-            />
         </Box>
     )
 }

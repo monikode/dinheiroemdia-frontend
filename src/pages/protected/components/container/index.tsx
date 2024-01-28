@@ -5,11 +5,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { StyledButton } from "../../../../shared/components/button";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
+import IconWhite from "../../../../shared/assets/svg/icon_white.svg";
 
 export function PrivateContainer(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarWidth, setSidebarWidth] = useState(200);
+
+  const logout = () => {
+    localStorage.removeItem("dd-authenticated");
+    localStorage.removeItem("dd-token");
+    navigate("/login");
+  };
   function Sidebar() {
     return (
       <Box
@@ -18,7 +25,9 @@ export function PrivateContainer(props) {
           width: `${sidebarWidth}px`,
         }}
       >
-        <Box className="icon">DD</Box>
+        <Box className="icon">
+          <img src={IconWhite} alt="Dinheiro em dia" />
+        </Box>
         <Box className="links">
           <Box
             className={location.pathname.includes("/home") ? "active" : ""}
@@ -41,7 +50,7 @@ export function PrivateContainer(props) {
         </Box>
 
         <Box className="logout">
-          <StyledButton variant="contained">
+          <StyledButton variant="contained" onClick={() => logout()}>
             <LogoutIcon className="icon"></LogoutIcon>Sair
           </StyledButton>
         </Box>
@@ -55,7 +64,7 @@ export function PrivateContainer(props) {
         <Sidebar />
       </Box>
       <Box className="navbar">
-        <IconButton size="large" onClick={()=>navigate("/perfil")}>
+        <IconButton size="large" onClick={() => navigate("/perfil")}>
           <AccountCircleTwoToneIcon fontSize="inherit" />
         </IconButton>
       </Box>
