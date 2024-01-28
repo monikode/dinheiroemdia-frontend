@@ -17,6 +17,7 @@ export interface DialogProps {
   title: string;
   onClose: () => void;
   onConfirm: () => void;
+  confirmDisabled: false;
 }
 
 const RoundDialog = styled(Dialog)(({ theme }) => ({
@@ -33,7 +34,7 @@ const RoundDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function StyledDialog(props: any) {
-  const { openProps, onConfirm, onClose } = props;
+  const { openProps, onConfirm, onClose, confirmDisabled } = props;
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -74,7 +75,7 @@ export default function StyledDialog(props: any) {
         <DialogContent>{props.children}</DialogContent>
         <DialogActions>
           <StyledButton onClick={handleClose}>Cancelar</StyledButton>
-          <StyledButton variant="contained" onClick={handleConfirm}>
+          <StyledButton variant="contained" onClick={handleConfirm} disabled={confirmDisabled}>
             Confirmar
           </StyledButton>
         </DialogActions>

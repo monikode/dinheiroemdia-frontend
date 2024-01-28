@@ -10,6 +10,8 @@ import { StyledCard } from "../card/index";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { StyledButton } from "../button";
+import AddIcon from "@mui/icons-material/Add";
 
 export interface CardItemProps {
   id: number;
@@ -58,7 +60,7 @@ function CardItem(item: CardItemProps) {
       <Grid container direction="column" alignItems="center">
         <Grid item alignItems="center">
           {" "}
-          <FastfoodIcon className="icon" sx={{backgroundColor: item.color}}/>
+          <FastfoodIcon className="icon" sx={{ backgroundColor: item.color }} />
         </Grid>
         <Grid item>
           {" "}
@@ -120,11 +122,16 @@ export function CardTable(props: CardTableProps) {
           direction={"column"}
           justifyContent={"center"}
           alignItems={"center"}
+          gap={2}
         >
           <Grid item>
-            <Button variant="contained">+</Button>
+            <StyledButton variant="contained">
+              <AddIcon sx={{ fontSize: 40 }}></AddIcon>
+            </StyledButton>
           </Grid>
-          <Grid item>{addText ?? "Adicionar"}</Grid>
+          <Grid item>
+            <Typography variant="subtitle2">{addText ?? "Adicionar"}</Typography>
+          </Grid>
         </Grid>
 
         {list.map((item) => (

@@ -1,9 +1,13 @@
-import { Card, CardContent } from "@mui/material";
+import { Card, CardContent, InputLabel, styled } from "@mui/material";
+
+export const CardStyled = styled(Card)(({ theme }) => ({
+  borderRadius: 10
+}));
 
 export function StyledCard(props: any) {
   return (
-    <Card {...props}>
+    <CardStyled {...props}>
       <CardContent>{props.children}</CardContent>
-    </Card>
+    </CardStyled>
   );
 }

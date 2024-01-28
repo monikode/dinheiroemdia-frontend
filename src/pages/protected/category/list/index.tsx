@@ -85,6 +85,8 @@ export function Categories() {
           onCreate={onCreate}
           list={list}
           itemRoute="/categoria/"
+        addText="Adicionar Categoria"
+
         ></CardTable>
       </Grid>
       <StyledDialog
@@ -92,7 +94,8 @@ export function Categories() {
         onClose={onClose}
         onConfirm={onConfirm}
         title={catSelected > 0? "Editar Categoria": "Nova Categoria"}
-      >
+        confirmDisabled={name.trim().length == 0 || color.trim().length == 0}
+     >
         <StyledTextField
           id="outlined-basic"
           label="Nome"

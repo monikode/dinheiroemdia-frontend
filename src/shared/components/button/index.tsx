@@ -1,5 +1,8 @@
-import { Button } from "@mui/material";
+import { Button, styled } from "@mui/material";
 
+export const ButtonStyled = styled(Button)(({ theme }) => ({
+  borderRadius: 10,
+}));
 export function StyledButton(props: any) {
-  return <Button {...props}>{props.children}</Button>;
+  return <ButtonStyled {...props}>{props.children}</ButtonStyled>;
 }
