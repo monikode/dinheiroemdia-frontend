@@ -8,41 +8,28 @@ import {
 import StyledDialog from "../../../../shared/components/dialog/index";
 import { CategoryForm } from "../form/index";
 import { StyledTextField } from "../../../../shared/components/text-field";
-import { categoryOperations } from "../../../../api/category";
+import { Category, categoryOperations } from "../../../../api/category";
 import { ColorPicker } from "../../../../shared/components/color-picker";
+import { SpentForm } from "../../spents";
+import { Spent } from "../../../../api/spent";
 
 export function Categories() {
   const [list, setList] = useState<CardItemProps[]>([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
-  const [catSelected, setCatSelected] = useState(-1);
+  const [category, setCategory] = useState<Category | null>(null);
   const onCreate = () => {
     setOpenDialog(true);
   };
 
   const onClose = () => {
-    setName("")
-    setColor("");
-    setOpenDialog(false);
+    setCategory(null)
   };
 
-  const onConfirm = () => {
-    if (catSelected >= 0) {
-      categoryOperations.update(catSelected, name, color, "fast-food").then((res) => {
-        getList();
-        setCatSelected(-1);
-        setOpenDialog(false);
-        setName("")
-      });
-    } else {
-      categoryOperations.create(name, color, "fast-food").then((res) => {
-        getList();
-        setOpenDialog(false);
-        setName("")
-
-      });
-    }
+  const onConfirmed = () => {
+    getList();
+    setCategory(null)
   };
 
   const getList = () => {
@@ -57,13 +44,14 @@ export function Categories() {
             onDelete: () => {
               categoryOperations.delete(item.id).then((res) => {
                 getList();
+                setCategory(null);
               });
             },
             onUpdate: () => {
               setOpenDialog(true);
-              setCatSelected(item.id);
+              setCategory(item);
               setColor(item.color);
-              setName(item.name)
+              setName(item.name);
             },
           };
         })
@@ -85,26 +73,16 @@ export function Categories() {
           onCreate={onCreate}
           list={list}
           itemRoute="/categoria/"
-        addText="Adicionar Categoria"
-
+          addText="Adicionar Categoria"
         ></CardTable>
       </Grid>
-      <StyledDialog
-        openProps={openDialog}
+      <CategoryForm
+        open={openDialog}
+        setOpen={setOpenDialog}
         onClose={onClose}
-        onConfirm={onConfirm}
-        title={catSelected > 0? "Editar Categoria": "Nova Categoria"}
-        confirmDisabled={name.trim().length == 0 || color.trim().length == 0}
-     >
-        <StyledTextField
-          id="outlined-basic"
-          label="Nome"
-          variant="outlined"
-          value={name}
-          onChange={(ev) => setName(ev.target.value)}
-        />
-        <ColorPicker label="Cor" value={color} onChange={ev=>setColor(ev.target.value)}></ColorPicker>
-      </StyledDialog>
+        onConfirmed={onConfirmed}
+        category={category}
+      ></CategoryForm>
     </Grid>
   );
 }

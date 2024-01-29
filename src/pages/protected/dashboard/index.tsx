@@ -27,24 +27,88 @@ import {
 import { Pie, Bar, Chart, Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import { LoginResponseUser } from "../../../api/user";
+import { SpentForm } from "../spents";
+import { CategoryForm } from "../category/form";
+import { Spent } from "../../../api/spent";
+import { AccountForm } from "../accounts/form";
 
-const actions = [
-  { icon: <FileCopyIcon />, name: "Novo Gasto" },
-  { icon: <SaveIcon />, name: "Nova Categoria" },
-  { icon: <PrintIcon />, name: "Nova Conta" },
-];
+function DashboardForms() {
+  const [spentOpen, setSpentOpen] = useState(false);
+  const [categoryOpen, setCategoryOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+
+
+
+  const onClose = () => {};
+
+  const onConfirmed = () => {};
+
+  const actions = [
+    {
+      icon: <FileCopyIcon />,
+      name: "Novo Gasto",
+      onClick: () => setSpentOpen(true),
+    },
+    {
+      icon: <SaveIcon />,
+      name: "Nova Categoria",
+      onClick: () => setCategoryOpen(true),
+    },
+    {
+      icon: <PrintIcon />,
+      name: "Nova Conta",
+      onClick: () => setAccountOpen(true),
+    },
+  ];
+
+  return (
+    <>
+      <CategoryForm
+        open={categoryOpen}
+        setOpen={setCategoryOpen}
+        onClose={onClose}
+        onConfirmed={onConfirmed}
+      ></CategoryForm>
+
+      <SpentForm
+        open={spentOpen}
+        setOpen={setSpentOpen}
+        onClose={onClose}
+      ></SpentForm>
+      <AccountForm
+        open={accountOpen}
+        setOpen={setAccountOpen}
+        onClose={onClose}
+        onConfirmed={onConfirmed}
+      />
+      <SpeedDial
+        ariaLabel="SpeedDial basic example"
+        sx={{ position: "fixed", bottom: 48, right: 64 }}
+        icon={<SpeedDialIcon />}
+      >
+        {actions.map((action) => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+            onClick={action.onClick}
+          />
+        ))}
+      </SpeedDial>
+    </>
+  );
+}
 
 export function Dashboard() {
   const [name, setName] = useState("");
-  useEffect(()=>{
+  useEffect(() => {
     const lsUser: LoginResponseUser = JSON.parse(
       localStorage.getItem("dd-user") ?? ""
     );
     if (lsUser) {
-      
       setName(lsUser.name);
     }
-  }, [])
+  }, []);
   ChartJS.register(
     ArcElement,
     CategoryScale,
@@ -165,19 +229,7 @@ export function Dashboard() {
         </Box>
       </Box>
 
-      <SpeedDial
-        ariaLabel="SpeedDial basic example"
-        sx={{ position: "fixed", bottom: 48, right: 64 }}
-        icon={<SpeedDialIcon />}
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-          />
-        ))}
-      </SpeedDial>
+      <DashboardForms />
     </Grid>
   );
 }

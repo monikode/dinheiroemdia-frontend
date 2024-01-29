@@ -21,7 +21,7 @@ export interface LoginResponse {
   message: string;
 }
 export const userOperations = {
-  getByToken: (id: number) => axiosInstance.get(`/users/${id}`),
+  getByToken: () => axiosInstance.get<LoginResponseUser>(`/users/find-by-token`),
   create: (user: User, password: string) =>
     axiosInstance.post(`/users/register/`, { ...user, password }),
   login: (email: string, password: string) =>

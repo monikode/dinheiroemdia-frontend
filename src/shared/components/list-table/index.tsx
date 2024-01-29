@@ -44,7 +44,7 @@ function ListItem() {
     </Box>
   );
 }
-export function ListTable() {
+export function ListTable(props) {
   const list = Array(3).fill({
     date: new Date().toLocaleDateString("en-GB"),
     list: Array(5).fill({
@@ -67,6 +67,7 @@ export function ListTable() {
             className="grid-item"
             alignItems={"center"}
             gap={2}
+            onClick={props.onCreate}
           >
             <Grid item>
               <StyledButton variant="contained">

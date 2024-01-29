@@ -19,9 +19,21 @@ import { Category } from "./pages/protected/category/view/index";
 import { Accounts } from "./pages/protected/accounts/list/index";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { userOperations } from "./api/user";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
-  const user = localStorage.getItem("dd-authenticated");
+  let user = localStorage.getItem("dd-authenticated");
+  userOperations
+  .getByToken()
+  .then((res) => {
+    
+    localStorage.setItem("dd-authenticated", "true");
+    localStorage.setItem("dd-user", JSON.stringify(res.data));
+  })
+  .catch((e) => {
+    user = null
+  });
+
   if (!user) {
     return <Navigate to={`/login`} replace />;
   }
