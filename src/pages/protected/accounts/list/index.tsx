@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { CircularProgress, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CardItemProps, CardTable } from "../../../../shared/components/card-table/index";
 import StyledDialog from "../../../../shared/components/dialog/index";
@@ -15,7 +15,9 @@ export function Accounts() {
   const [color, setColor] = useState("");
   const [accSelected, setAccSelected] = useState(-1);
   const [openDialog, setOpenDialog] = useState(false)
-  
+  const [isLoading, setIsLoading] = useState(true);
+ 
+
   const onCreate = () => {
     setOpenDialog(true)
   }
@@ -45,8 +47,10 @@ export function Accounts() {
   };
 
   const getList = () => {
+    setIsLoading(true)
     accountOperations.list().then((res) => {
-      console.log(res);
+      setIsLoading(false)
+
       setList(
         res.data.map((item) => {
           return {
@@ -82,22 +86,26 @@ export function Accounts() {
 
       <Grid item xs={6}>
 
-      <CardTable
-          onCreate={onCreate}
-          list={list}
-          itemRoute="/conta/"
-        addText="Adicionar Conta"
 
-        ></CardTable>
+        {isLoading ?
+          <CircularProgress sx={{ margin: '0 auto', padding: "10px", display: "block" }} /> : 
+          <CardTable
+              onCreate={onCreate}
+              list={list}
+              itemRoute="/conta/"
+            addText="Adicionar Conta"
+    
+            ></CardTable>
+        }
       </Grid>
 
       <StyledDialog
         openProps={openDialog}
         onClose={onClose}
         onConfirm={onConfirm}
-        title={accSelected > 0? "Editar Conta": "Nova Conta"}
+        title={accSelected > 0 ? "Editar Conta" : "Nova Conta"}
         confirmDisabled={name.trim().length == 0 || color.trim().length == 0}
-     >
+      >
         <StyledTextField
           id="outlined-basic"
           label="Nome"
@@ -105,7 +113,7 @@ export function Accounts() {
           value={name}
           onChange={(ev) => setName(ev.target.value)}
         />
-        <ColorPicker label="Cor" value={color} onChange={ev=>setColor(ev.target.value)}></ColorPicker>
+        <ColorPicker label="Cor" value={color} onChange={ev => setColor(ev.target.value)}></ColorPicker>
       </StyledDialog>
     </Grid>
   );

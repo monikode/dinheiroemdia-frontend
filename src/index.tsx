@@ -19,6 +19,7 @@ import { Category } from "./pages/protected/category/view/index";
 import { Accounts } from "./pages/protected/accounts/list/index";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Account } from "./pages/protected/accounts/view";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const user = localStorage.getItem("dd-authenticated");
@@ -90,7 +91,7 @@ const router = createBrowserRouter([
     path: "/conta/:id",
     element: (
       <ProtectedRoute>
-        <Accounts />
+        <Account />
       </ProtectedRoute>
     ),
   },

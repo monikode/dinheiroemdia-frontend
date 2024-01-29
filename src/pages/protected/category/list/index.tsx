@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { CircularProgress, Grid, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Button } from "../../../../../node_modules/@mui/material/index";
 import {
@@ -17,6 +17,7 @@ export function Categories() {
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
   const [catSelected, setCatSelected] = useState(-1);
+  const [isLoading, setIsLoading] = useState(true);
   const onCreate = () => {
     setOpenDialog(true);
   };
@@ -46,8 +47,10 @@ export function Categories() {
   };
 
   const getList = () => {
+    setIsLoading(true)
     categoryOperations.list().then((res) => {
-      console.log(res);
+      setIsLoading(false)
+
       setList(
         res.data.map((item) => {
           return {
@@ -64,6 +67,7 @@ export function Categories() {
               setCatSelected(item.id);
               setColor(item.color);
               setName(item.name)
+
             },
           };
         })
@@ -77,25 +81,28 @@ export function Categories() {
   return (
     <Grid container direction={"column"} flexWrap={"nowrap"}>
       <Grid item xs={6}>
-        <Typography variant="h4">Categorias</Typography>
+        <Typography variant="h4">  Categorias</Typography>
       </Grid>
 
-      <Grid item xs={6}>
-        <CardTable
-          onCreate={onCreate}
-          list={list}
-          itemRoute="/categoria/"
-        addText="Adicionar Categoria"
+      <Grid item xs={6} >
+        {isLoading ?
+          <CircularProgress sx={{margin: '0 auto', padding: "10px", display: "block"}} /> : <CardTable
+            onCreate={onCreate}
+            list={list}
+            itemRoute="/categoria/"
+            addText="Adicionar Categoria"
 
-        ></CardTable>
+          ></CardTable>
+        }
+
       </Grid>
       <StyledDialog
         openProps={openDialog}
         onClose={onClose}
         onConfirm={onConfirm}
-        title={catSelected > 0? "Editar Categoria": "Nova Categoria"}
+        title={catSelected > 0 ? "Editar Categoria" : "Nova Categoria"}
         confirmDisabled={name.trim().length == 0 || color.trim().length == 0}
-     >
+      >
         <StyledTextField
           id="outlined-basic"
           label="Nome"
@@ -103,7 +110,7 @@ export function Categories() {
           value={name}
           onChange={(ev) => setName(ev.target.value)}
         />
-        <ColorPicker label="Cor" value={color} onChange={ev=>setColor(ev.target.value)}></ColorPicker>
+        <ColorPicker label="Cor" value={color} onChange={ev => setColor(ev.target.value)}></ColorPicker>
       </StyledDialog>
     </Grid>
   );
