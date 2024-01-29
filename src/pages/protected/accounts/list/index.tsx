@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CardItemProps, CardTable } from "../../../../shared/components/card-table/index";
 import StyledDialog from "../../../../shared/components/dialog/index";
 import { CategoryForm } from "../../category/form/index";
@@ -71,6 +71,9 @@ export function Accounts() {
     });
   };
 
+  useEffect(() => {
+    getList();
+  }, []);
   return (
     <Grid container direction={"column"} flexWrap={"nowrap"}>
       <Grid item xs={6}>
