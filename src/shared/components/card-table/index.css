@@ -1,0 +1,33 @@
+.card-grid {
+    gap: 1rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+
+}
+
+.card-grid .grid-item {
+   
+}
+
+.card-item {
+    padding: 16px 32px;
+
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.card-item .options {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+.card-item .icon {
+    padding: 32px;
+    color: #fff;
+    border-radius: 100%;
+    overflow: visible;
+}

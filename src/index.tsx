@@ -1,8 +1,12 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
 import { Login } from "./pages/public/login";
@@ -10,11 +14,23 @@ import { SignUp } from "./pages/public/signup";
 import { Dashboard } from "./pages/protected/dashboard";
 import { PrivateContainer } from "./pages/protected/components/container";
 import { Perfil } from "./pages/protected/perfil";
+import { Categories } from "./pages/protected/category/list/index";
+import { Category } from "./pages/protected/category/view/index";
+import { Accounts } from "./pages/protected/accounts/list/index";
+
+const ProtectedRoute = ({ children }: { children: ReactNode }) => {
+  const user = localStorage.getItem("dd-authenticated");
+  if (!user) {
+    return <Navigate to={`/login`} replace />;
+  }
+
+  return <PrivateContainer>{children}</PrivateContainer>;
+};
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Navigate to="/login" replace={true} />,
   },
   {
     path: "/design-system",
@@ -31,34 +47,50 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: (
-      <PrivateContainer>
+      <ProtectedRoute>
         <Dashboard />
-      </PrivateContainer>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/perfil",
     element: (
-      <PrivateContainer>
+      <ProtectedRoute>
         <Perfil />
-      </PrivateContainer>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/categorias",
-    element: <div>Hello world!</div>,
+    element: (
+      <ProtectedRoute>
+        <Categories />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/categoria/:id",
-    element: <div>Hello world!</div>,
+    element: (
+      <ProtectedRoute>
+        <Category />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/contas",
-    element: <div>Hello world!</div>,
+    element: (
+      <ProtectedRoute>
+        <Accounts />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/conta/:id",
-    element: <div>Hello world!</div>,
+    element: (
+      <ProtectedRoute>
+        <Accounts />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

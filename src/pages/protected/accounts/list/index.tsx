@@ -1,25 +1,24 @@
 import { Grid, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Button } from "../../../../../node_modules/@mui/material/index";
-import {
-  CardItemProps,
-  CardTable,
-} from "../../../../shared/components/card-table/index";
+import { useState } from "react";
+import { CardItemProps, CardTable } from "../../../../shared/components/card-table/index";
 import StyledDialog from "../../../../shared/components/dialog/index";
-import { CategoryForm } from "../form/index";
-import { StyledTextField } from "../../../../shared/components/text-field";
+import { CategoryForm } from "../../category/form/index";
+import { AccountForm } from "../form/index";
 import { categoryOperations } from "../../../../api/category";
+import { accountOperations } from "../../../../api/account";
+import { StyledTextField } from "../../../../shared/components/text-field";
 import { ColorPicker } from "../../../../shared/components/color-picker";
 
-export function Categories() {
+export function Accounts() {
   const [list, setList] = useState<CardItemProps[]>([]);
-  const [openDialog, setOpenDialog] = useState(false);
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
-  const [catSelected, setCatSelected] = useState(-1);
+  const [accSelected, setAccSelected] = useState(-1);
+  const [openDialog, setOpenDialog] = useState(false)
+  
   const onCreate = () => {
-    setOpenDialog(true);
-  };
+    setOpenDialog(true)
+  }
 
   const onClose = () => {
     setName("")
@@ -28,15 +27,15 @@ export function Categories() {
   };
 
   const onConfirm = () => {
-    if (catSelected >= 0) {
-      categoryOperations.update(catSelected, name, color, "fast-food").then((res) => {
+    if (accSelected >= 0) {
+      accountOperations.update(accSelected, name, color, "fast-food").then((res) => {
         getList();
-        setCatSelected(-1);
+        setAccSelected(-1);
         setOpenDialog(false);
         setName("")
       });
     } else {
-      categoryOperations.create(name, color, "fast-food").then((res) => {
+      accountOperations.create(name, color, "fast-food", 0, "0").then((res) => {
         getList();
         setOpenDialog(false);
         setName("")
@@ -46,7 +45,7 @@ export function Categories() {
   };
 
   const getList = () => {
-    categoryOperations.list().then((res) => {
+    accountOperations.list().then((res) => {
       console.log(res);
       setList(
         res.data.map((item) => {
@@ -55,13 +54,14 @@ export function Categories() {
             percentage: 0,
             ...item,
             onDelete: () => {
-              categoryOperations.delete(item.id).then((res) => {
+              accountOperations.delete(item.id).then((res) => {
+                setAccSelected(-1);
                 getList();
               });
             },
             onUpdate: () => {
               setOpenDialog(true);
-              setCatSelected(item.id);
+              setAccSelected(item.id);
               setColor(item.color);
               setName(item.name)
             },
@@ -71,29 +71,28 @@ export function Categories() {
     });
   };
 
-  useEffect(() => {
-    getList();
-  }, []);
   return (
     <Grid container direction={"column"} flexWrap={"nowrap"}>
       <Grid item xs={6}>
-        <Typography variant="h4">Categorias</Typography>
+        <Typography variant="h4">Contas</Typography>
       </Grid>
 
       <Grid item xs={6}>
-        <CardTable
+
+      <CardTable
           onCreate={onCreate}
           list={list}
-          itemRoute="/categoria/"
-        addText="Adicionar Categoria"
+          itemRoute="/conta/"
+        addText="Adicionar Conta"
 
         ></CardTable>
       </Grid>
+
       <StyledDialog
         openProps={openDialog}
         onClose={onClose}
         onConfirm={onConfirm}
-        title={catSelected > 0? "Editar Categoria": "Nova Categoria"}
+        title={accSelected > 0? "Editar Conta": "Nova Conta"}
         confirmDisabled={name.trim().length == 0 || color.trim().length == 0}
      >
         <StyledTextField
