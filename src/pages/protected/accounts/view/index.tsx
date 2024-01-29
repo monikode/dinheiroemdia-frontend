@@ -2,24 +2,29 @@ import { Grid, IconButton, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ListTable } from "../../../../shared/components/list-table/index";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 export function Account() {
-  const navigate = useNavigate()
-  return (
-    <Grid container direction={"column"} flexWrap={"nowrap"} gap={2}>
-      <Grid item xs={6} container gap={1}>
-        <Grid item>
-          <IconButton onClick={() => navigate(-1)}>
+    const navigate = useNavigate()
+    return (
+        <Grid container direction={"column"} flexWrap={"nowrap"} gap={2}>
+            <Grid item xs={6} container gap={1}>
+                <Grid item>
+                    <IconButton onClick={() => navigate(-1)}>
 
-            <KeyboardArrowLeftIcon color="primary"></KeyboardArrowLeftIcon>
-          </IconButton></Grid>
-        <Grid item>  <Typography variant="h4">  Conta</Typography></Grid>
+                        <KeyboardArrowLeftIcon color="primary"></KeyboardArrowLeftIcon>
+                    </IconButton></Grid>
+                <Grid item>  <Typography variant="h4">  Conta</Typography></Grid>
+                <Grid item >
+                    <IconButton onClick={() => navigate(-1)}>
 
-      </Grid>
+                        <FilterListIcon color="primary"></FilterListIcon>
+                    </IconButton></Grid>
+            </Grid>
 
-      <Grid item xs={6}>
-        <ListTable></ListTable>
-      </Grid>
-    </Grid>
-  );
+            <Grid item xs={6}>
+                <ListTable></ListTable>
+            </Grid>
+        </Grid>
+    );
 }
