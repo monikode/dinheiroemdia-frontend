@@ -60,9 +60,23 @@ export function ListTable() {
     <StyledCard container direction={"column"} flexWrap={"nowrap"}>
       <Box className="list-grid">
         <Box className="grid-item">
-          <StyledButton variant="contained">
-            <AddIcon ></AddIcon>
-          </StyledButton>
+          <Grid
+            container
+            item
+            xs={"auto"}
+            className="grid-item"
+            alignItems={"center"}
+            gap={2}
+          >
+            <Grid item>
+              <StyledButton variant="contained">
+                <AddIcon sx={{ fontSize: 30 }}></AddIcon>
+              </StyledButton>
+            </Grid>
+            <Grid item>
+              <Typography variant="h6">Adicionar</Typography>
+            </Grid>
+          </Grid>
         </Box>
 
         {list.map((item) => {

@@ -130,7 +130,7 @@ export function CardTable(props: CardTableProps) {
             </StyledButton>
           </Grid>
           <Grid item>
-            <Typography variant="subtitle2">{addText ?? "Adicionar"}</Typography>
+            <Typography variant="h6">{addText ?? "Adicionar"}</Typography>
           </Grid>
         </Grid>
 
