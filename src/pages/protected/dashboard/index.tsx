@@ -25,6 +25,8 @@ import {
   Tooltip,
 } from "chart.js";
 import { Pie, Bar, Chart, Line } from "react-chartjs-2";
+import { useEffect, useState } from "react";
+import { LoginResponseUser } from "../../../api/user";
 
 const actions = [
   { icon: <FileCopyIcon />, name: "Novo Gasto" },
@@ -33,6 +35,16 @@ const actions = [
 ];
 
 export function Dashboard() {
+  const [name, setName] = useState("");
+  useEffect(()=>{
+    const lsUser: LoginResponseUser = JSON.parse(
+      localStorage.getItem("dd-user") ?? ""
+    );
+    if (lsUser) {
+      
+      setName(lsUser.name);
+    }
+  }, [])
   ChartJS.register(
     ArcElement,
     CategoryScale,
@@ -58,7 +70,7 @@ export function Dashboard() {
       <Grid container item>
         <Grid item container>
           <Grid item sx={{ flex: 1 }}>
-            <Typography variant="h4">Suas despesas, Sr(a) Fulana!</Typography>
+            <Typography variant="h4">Suas despesas, Sr(a) {name}!</Typography>
           </Grid>
           <Grid item>
             <StyledButton variant="contained">Exportar relatório</StyledButton>

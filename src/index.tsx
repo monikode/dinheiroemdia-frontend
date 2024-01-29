@@ -17,6 +17,8 @@ import { Perfil } from "./pages/protected/perfil";
 import { Categories } from "./pages/protected/category/list/index";
 import { Category } from "./pages/protected/category/view/index";
 import { Accounts } from "./pages/protected/accounts/list/index";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const user = localStorage.getItem("dd-authenticated");
@@ -101,6 +103,7 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
+      <ToastContainer />
     </ThemeProvider>
   </React.StrictMode>
 );

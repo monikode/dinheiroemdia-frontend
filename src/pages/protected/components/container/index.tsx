@@ -15,6 +15,7 @@ export function PrivateContainer(props) {
   const logout = () => {
     localStorage.removeItem("dd-authenticated");
     localStorage.removeItem("dd-token");
+    localStorage.removeItem("dd-user");
     navigate("/login");
   };
   function Sidebar() {

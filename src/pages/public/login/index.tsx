@@ -20,6 +20,7 @@ export function Login() {
       .then((res) => {
         localStorage.setItem("dd-authenticated", "true");
         localStorage.setItem("dd-token", res.data.result.access_token);
+        localStorage.setItem("dd-user", JSON.stringify(res.data.user));
         navigate("/home");
       })
       .catch((e) => {
