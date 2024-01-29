@@ -1,0 +1,30 @@
+.list-grid {
+    gap: 1rem;
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+
+
+}
+
+.list-grid .grid-item {
+   
+}
+
+.list-item {
+    padding: 16px 32px;
+
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+
+.list-item .icon {
+    padding: 16px;
+    background-color: blueviolet;
+    color: #fff;
+    border-radius: 100%;
+    overflow: visible;
+}
