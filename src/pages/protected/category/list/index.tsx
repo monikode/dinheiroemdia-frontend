@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { CircularProgress, Grid, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Button } from "../../../../../node_modules/@mui/material/index";
 import {
@@ -19,6 +19,8 @@ export function Categories() {
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
   const [category, setCategory] = useState<Category | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   const onCreate = () => {
     setOpenDialog(true);
   };
@@ -33,8 +35,10 @@ export function Categories() {
   };
 
   const getList = () => {
+    setIsLoading(true)
     categoryOperations.list().then((res) => {
-      console.log(res);
+      setIsLoading(false)
+
       setList(
         res.data.map((item) => {
           return {
@@ -65,16 +69,20 @@ export function Categories() {
   return (
     <Grid container direction={"column"} flexWrap={"nowrap"}>
       <Grid item xs={6}>
-        <Typography variant="h4">Categorias</Typography>
+        <Typography variant="h4">  Categorias</Typography>
       </Grid>
 
-      <Grid item xs={6}>
-        <CardTable
-          onCreate={onCreate}
-          list={list}
-          itemRoute="/categoria/"
-          addText="Adicionar Categoria"
-        ></CardTable>
+      <Grid item xs={6} >
+        {isLoading ?
+          <CircularProgress sx={{margin: '0 auto', padding: "10px", display: "block"}} /> : <CardTable
+            onCreate={onCreate}
+            list={list}
+            itemRoute="/categoria/"
+            addText="Adicionar Categoria"
+
+          ></CardTable>
+        }
+
       </Grid>
       <CategoryForm
         open={openDialog}

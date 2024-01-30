@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { CircularProgress, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
   CardItemProps,
@@ -17,7 +17,9 @@ export function Accounts() {
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
   const [account, setAccount] = useState<Account | null>(null);
-  const [openDialog, setOpenDialog] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false)
+  const [isLoading, setIsLoading] = useState(true);
+ 
 
   const onCreate = () => {
     setOpenDialog(true);
@@ -33,7 +35,10 @@ export function Accounts() {
 
 
   const getList = () => {
+    setIsLoading(true)
     accountOperations.list().then((res) => {
+      setIsLoading(false)
+
       setList(
         res.data.map((item) => {
           return {
@@ -68,12 +73,18 @@ export function Accounts() {
       </Grid>
 
       <Grid item xs={6}>
-        <CardTable
-          onCreate={onCreate}
-          list={list}
-          itemRoute="/conta/"
-          addText="Adicionar Conta"
-        ></CardTable>
+
+
+        {isLoading ?
+          <CircularProgress sx={{ margin: '0 auto', padding: "10px", display: "block" }} /> : 
+          <CardTable
+              onCreate={onCreate}
+              list={list}
+              itemRoute="/conta/"
+            addText="Adicionar Conta"
+    
+            ></CardTable>
+        }
       </Grid>
 
       <AccountForm
