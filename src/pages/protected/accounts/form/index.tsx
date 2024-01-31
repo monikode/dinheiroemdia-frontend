@@ -6,6 +6,10 @@ import StyledDialog from "../../../../shared/components/dialog";
 import { StyledTextField } from "../../../../shared/components/text-field/index";
 import { Account, accountOperations } from "../../../../api/account";
 import { IconPicker } from "../../../../shared/components/icon-picker";
+import SavingsIcon from '@mui/icons-material/Savings';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+
 import { Grid } from "@mui/material";
 
 export interface AccountFormProps {

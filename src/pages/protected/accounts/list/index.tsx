@@ -35,6 +35,7 @@ export function Accounts() {
 
 
   const getList = () => {
+
     setIsLoading(true)
     accountOperations.list().then((res) => {
       setIsLoading(false)
@@ -46,6 +47,7 @@ export function Accounts() {
            percentage: item.percentage??0,
 
             ...item,
+            icon: item.type == "0"? "current": item.type=="1"?"savings": "creditcard",
             onDelete: () => {
               accountOperations.delete(item.id).then((res) => {
                 setAccount(null);

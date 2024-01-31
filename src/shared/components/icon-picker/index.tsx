@@ -9,29 +9,30 @@ import SchoolIcon from "@mui/icons-material/School";
 import MovieIcon from "@mui/icons-material/Movie";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
-import {
-    FormControl,
-    Select,
-  MenuItem,
+import SavingsIcon from "@mui/icons-material/Savings";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
-  } from "@mui/material";
+import { FormControl, Select, MenuItem } from "@mui/material";
 import { InputStyled, LabelStyled } from "../inputstyle";
 
 export const iconsList = [
-    { name: "handyman", icon: <HandymanIcon /> },
-    { name: "beach", icon: <BeachAccessIcon /> },
-    { name: "airplane", icon: <AirplanemodeActiveIcon /> },
-    { name: "localmall", icon: <LocalMallIcon /> },
-    { name: "lightbulb", icon: <LightbulbIcon /> },
-    { name: "hospital", icon: <LocalHospitalIcon /> },
-    { name: "school", icon: <SchoolIcon /> },
-    { name: "movie", icon: <MovieIcon /> },
-    { name: "checkroom", icon: <CheckroomIcon /> },
-    { name: "article", icon: <ArticleIcon /> },
-    { name: "fast-food", icon: <FastfoodIcon /> },
-  ];
+  { name: "handyman", icon: <HandymanIcon /> },
+  { name: "beach", icon: <BeachAccessIcon /> },
+  { name: "airplane", icon: <AirplanemodeActiveIcon /> },
+  { name: "localmall", icon: <LocalMallIcon /> },
+  { name: "lightbulb", icon: <LightbulbIcon /> },
+  { name: "hospital", icon: <LocalHospitalIcon /> },
+  { name: "school", icon: <SchoolIcon /> },
+  { name: "movie", icon: <MovieIcon /> },
+  { name: "checkroom", icon: <CheckroomIcon /> },
+  { name: "article", icon: <ArticleIcon /> },
+  { name: "fast-food", icon: <FastfoodIcon /> },
+  { name: "current", icon: <AccountBalanceWalletIcon /> },
+  { name: "savings", icon: <SavingsIcon /> },
+  { name: "credit", icon: <CreditCardIcon /> },
+];
 export function IconPicker(props: any) {
- 
   return (
     <FormControl variant="standard">
       {props.label ? (
