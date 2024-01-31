@@ -12,19 +12,26 @@ import IconGreen from "../../../shared/assets/svg/icon_green.svg";
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   function login() {
+    setError(false);
+    setLoading(true);
     userOperations
       .login(email, password)
       .then((res) => {
+        setLoading(false);
         localStorage.setItem("dd-authenticated", "true");
         localStorage.setItem("dd-token", res.data.result.access_token);
         localStorage.setItem("dd-user", JSON.stringify(res.data.user));
         navigate("/home");
       })
       .catch((e) => {
-        alert("nao criou");
+        setLoading(false);
+
+        setError(true);
       });
   }
 
@@ -73,11 +80,16 @@ export function Login() {
                 type="password"
               />
             </Grid>
-
-            <Grid item>Lembrar de mim</Grid>
+            {error ? (
+              <Grid item>
+                <Typography variant="subtitle2" color="secondary">
+                  E-mail ou senha incorretos{" "}
+                </Typography>
+              </Grid>
+            ) : null}
           </Grid>
           <Grid item>
-            <StyledButton variant="contained" fullWidth onClick={() => login()}>
+            <StyledButton variant="contained" fullWidth onClick={() => login()} disabled={loading || email.trim().length == 0 || password.trim().length < 6}>
               Entrar
             </StyledButton>
           </Grid>

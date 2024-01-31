@@ -25,7 +25,7 @@ export function SignUp() {
       .create({ name, lastName, email, birthday }, password)
       .then((res) => {
         localStorage.setItem("dd-authenticated", "true");
-        
+
         navigate("/home");
       })
       .catch((e) => {
@@ -36,6 +36,7 @@ export function SignUp() {
     <Grid container sx={{ minHeight: "100vh" }}>
       <Grid
         container
+        item
         direction={"column"}
         justifyContent={"space-between"}
         xs={7}
@@ -107,6 +108,7 @@ export function SignUp() {
               <StyledTextField
                 label="Senha"
                 fullWidth
+                type="password"
                 value={password}
                 onChange={(ev) => setPassword(ev.target.value)}
               />
@@ -116,15 +118,30 @@ export function SignUp() {
               <StyledTextField
                 label="Repita senha"
                 fullWidth
+                type="password"
                 value={passwordRepeat}
                 onChange={(ev) => setPasswordRepeat(ev.target.value)}
+                // helperText="Senhas não coincidem"
+                error={password != passwordRepeat}
               />
             </Grid>
           </Grid>
 
           <Grid item>
-            <StyledButton variant="contained" fullWidth onClick={signUp}>
-              Próximo
+            <StyledButton
+              variant="contained"
+              fullWidth
+              onClick={signUp}
+              disabled={
+                password != passwordRepeat ||
+                name.trim().length == 0 ||
+                name.trim().length == 0 ||
+                lastName.trim().length == 0 ||
+                email.trim().length == 0 ||
+                password.trim().length < 6
+              }
+            >
+              Cadastrar
             </StyledButton>
           </Grid>
 
