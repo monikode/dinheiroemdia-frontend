@@ -73,7 +73,7 @@ function CardItem(item: CardItemProps) {
         <Grid item>
           {" "}
           <Typography textAlign="center">
-            R${item.consumption} gastos esse mês
+            R${item.consumption.toFixed(2)} gastos esse mês
           </Typography>
         </Grid>
         <Grid item>

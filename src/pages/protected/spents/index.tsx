@@ -21,7 +21,7 @@ export interface SpentFormProps {
 export function SpentForm(props: SpentFormProps) {
   const [name, setName] = useState("");
   const [value, setValue] = useState(100);
-  const [account, setAccount] = useState(props.accountId ?? -1);
+  const [account, setAccount] = useState(parseInt(props.accountId ?? -1));
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [category, setCategory] = useState(parseInt(props.categoryId ?? "-1"));
   const [categories, setCategories] = useState<Category[]>([]);
