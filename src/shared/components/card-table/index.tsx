@@ -7,11 +7,12 @@ import {
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./index.css";
 import { StyledCard } from "../card/index";
-import FastfoodIcon from "@mui/icons-material/Fastfood";
+
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { StyledButton } from "../button";
 import AddIcon from "@mui/icons-material/Add";
+import { iconsList } from "../icon-picker";
 
 export interface CardItemProps {
   id: number;
@@ -59,8 +60,9 @@ function CardItem(item: CardItemProps) {
     <StyledCard className="card-item">
       <Grid container direction="column" alignItems="center">
         <Grid item alignItems="center">
-          {" "}
-          <FastfoodIcon className="icon" sx={{ backgroundColor: item.color }} />
+          <Box className="icon" sx={{ backgroundColor: item.color }}>
+            {iconsList.find((value) => value.name == item.icon)?.icon}
+          </Box>
         </Grid>
         <Grid item>
           {" "}

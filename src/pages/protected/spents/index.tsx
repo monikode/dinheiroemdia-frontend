@@ -16,13 +16,14 @@ export interface SpentFormProps {
   categoryId?: number;
   accountId?: number;
   onClose: () => {};
+  onConfirmed: () => {};
 }
 export function SpentForm(props: SpentFormProps) {
   const [name, setName] = useState("");
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(100);
   const [account, setAccount] = useState(props.accountId ?? -1);
   const [accounts, setAccounts] = useState<Account[]>([]);
-  const [category, setCategory] = useState(props.categoryId ?? -1);
+  const [category, setCategory] = useState(parseInt(props.categoryId ?? "-1"));
   const [categories, setCategories] = useState<Category[]>([]);
 
 
@@ -33,7 +34,13 @@ export function SpentForm(props: SpentFormProps) {
   };
 
   const onConfirm = () => {
-    spentOperations.create(name, value, account, category).then((res) => {});
+    spentOperations.create(name, value, account, category).then((res) => {
+
+        props.setOpen(false);
+        setName("");
+        setValue(0);
+        props.onConfirmed();
+    });
   };
 
   useEffect(() => {

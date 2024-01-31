@@ -5,6 +5,8 @@ import { ColorPicker } from "../../../../shared/components/color-picker";
 import StyledDialog from "../../../../shared/components/dialog";
 import { StyledTextField } from "../../../../shared/components/text-field/index";
 import { Account, accountOperations } from "../../../../api/account";
+import { IconPicker } from "../../../../shared/components/icon-picker";
+import { Grid } from "@mui/material";
 
 export interface AccountFormProps {
   open: boolean;
@@ -27,7 +29,7 @@ export function AccountForm(props: AccountFormProps) {
 
   const onConfirm = () => {
     if (props.account) {
-        accountOperations
+      accountOperations
         .update(props.account.id, name, color, "fast-food", 0, "0")
         .then((res) => {
           // getList();
@@ -52,9 +54,9 @@ export function AccountForm(props: AccountFormProps) {
     if (props.account) {
       setName(props.account.name);
       setColor(props.account.color);
-    }else{
-        setName("");
-        setColor("");
+    } else {
+      setName("");
+      setColor("");
     }
   }, [props.account]);
 
@@ -63,22 +65,33 @@ export function AccountForm(props: AccountFormProps) {
       openProps={props.open}
       onClose={onClose}
       onConfirm={onConfirm}
-      title={props.account? "Editar Conta": "Nova Conta"}
-
+      title={props.account ? "Editar Conta" : "Nova Conta"}
       confirmDisabled={name.trim().length == 0 || color.trim().length == 0}
     >
-      <StyledTextField
-        id="outlined-basic"
-        label="Nome"
-        variant="outlined"
-        value={name}
-        onChange={(ev) => setName(ev.target.value)}
-      />
-      <ColorPicker
-        label="Cor"
-        value={color}
-        onChange={(ev) => setColor(ev.target.value)}
-      ></ColorPicker>
+      <Grid container gap={2}>
+        <Grid item xs={10}>
+          <StyledTextField
+            id="outlined-basic"
+            label="Nome"
+            variant="outlined"
+            value={name}
+            onChange={(ev) => setName(ev.target.value)}
+          />
+        </Grid>
+        <Grid item xs={1}>
+          <ColorPicker
+            label="Cor"
+            value={color}
+            onChange={(ev) => seftColor(ev.target.value)}
+          ></ColorPicker>
+        </Grid>
+      </Grid>
+    <Box >
+        <Box>Conta Corrente</Box>
+        <Box>Conta Poupança</Box>
+        <Box>Cartão de Crédito</Box>
+    </Box>
+      
     </StyledDialog>
   );
 }

@@ -8,6 +8,16 @@ export interface Spent {
   categoryId: number;
 }
 
+export interface SpentResponse {
+    id: number;
+    description: string;
+    value: number;
+    createdAt:Date;
+    account: {id:number; name:string};
+    category: {id:number; name:string};
+  }
+  
+
 export const spentOperations = {
   //   get: (id: number) => axiosInstance.get(`/account/${id}`),
   //   list: () => axiosInstance.get<Account[]>(`/account`),

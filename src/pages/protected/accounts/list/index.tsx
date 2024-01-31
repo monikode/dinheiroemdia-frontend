@@ -42,8 +42,9 @@ export function Accounts() {
       setList(
         res.data.map((item) => {
           return {
-            consumption: 0,
-            percentage: 0,
+           consumption: item.consumption??0,
+           percentage: item.percentage??0,
+
             ...item,
             onDelete: () => {
               accountOperations.delete(item.id).then((res) => {
