@@ -7,7 +7,7 @@ import { Account, accountOperations } from "../../../api/account";
 import { StyledTextField } from "../../../shared/components/text-field";
 import { StyledSelect } from "../../../shared/components/select";
 import {} from "@mui/base";
-import { MenuItem } from "@mui/material";
+import { InputAdornment, MenuItem } from "@mui/material";
 
 export interface SpentFormProps {
   open: boolean;
@@ -26,20 +26,22 @@ export function SpentForm(props: SpentFormProps) {
   const [category, setCategory] = useState(parseInt(props.categoryId ?? "-1"));
   const [categories, setCategories] = useState<Category[]>([]);
 
-
   const onClose = () => {
     setName("");
     setValue(0);
+    setCategory(-1);
+    setAccount(-1);
     props.setOpen(false);
   };
 
   const onConfirm = () => {
     spentOperations.create(name, value, account, category).then((res) => {
-
-        props.setOpen(false);
-        setName("");
-        setValue(0);
-        props.onConfirmed();
+      props.setOpen(false);
+      setName("");
+      setValue(0);
+      setCategory(-1);
+      setAccount(-1);
+      props.onConfirmed();
     });
   };
 
@@ -96,6 +98,15 @@ export function SpentForm(props: SpentFormProps) {
           <MenuItem value={item.id}>{item.name}</MenuItem>
         ))}
       </StyledSelect>
+      <StyledTextField
+        id="outlined-basic"
+        label="Valor"
+        variant="outlined"
+        startAdornment={<InputAdornment position="start">$</InputAdornment>}
+        value={value}
+        mask={[/\d/, /\d/, ".", /\d/, /\d/]}
+        onChange={(ev) => setValue(ev.target.value)}
+      />
     </StyledDialog>
   );
 }

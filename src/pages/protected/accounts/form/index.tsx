@@ -10,7 +10,7 @@ import SavingsIcon from "@mui/icons-material/Savings";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
-import { Grid, MenuItem, InputAdornment  } from "@mui/material";
+import { Grid, MenuItem, InputAdornment } from "@mui/material";
 import { StyledSelect } from "../../../../shared/components/select";
 
 export interface AccountFormProps {
@@ -72,11 +72,6 @@ export function AccountForm(props: AccountFormProps) {
     }
   }, [props.account]);
 
-  const handleNumberValidation = (value:string) => {
-    const inputValueNoSpace = value.replace(/\s+/igm, '')
-    const inputValueEnglish = inputValueNoSpace.replace("\d+(,\d{1,2})?").replace('.', '')
-    setValue(parseFloat(inputValueEnglish));
-  };
   return (
     <StyledDialog
       openProps={props.open}
@@ -108,11 +103,18 @@ export function AccountForm(props: AccountFormProps) {
         <Grid item xs={6}>
           <StyledTextField
             id="outlined-basic"
-            label="Nome"
+            label="Valor"
             variant="outlined"
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             value={value}
-            onChange={(ev) => handleNumberValidation(ev.target.value)}
+            mask={[
+              /\d/,
+              /\d/,
+              '.',
+              /\d/,
+              /\d/,
+            ]}
+            onChange={(ev) => setValue(ev.target.value)}
           />
         </Grid>
         <Grid item xs={5}>
