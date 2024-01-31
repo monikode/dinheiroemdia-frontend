@@ -92,7 +92,6 @@ export function ListTable(props: ListTableProps) {
             </Grid>
           </Grid>
           <Grid item xs="auto">
-            {" "}
             R${item.value}
           </Grid>
           <Grid item xs="auto">

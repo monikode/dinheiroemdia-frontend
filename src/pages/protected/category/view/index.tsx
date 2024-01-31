@@ -42,7 +42,7 @@ export function Category() {
             return {
               ...item,
               color: "",
-              value: "",
+              icon: "",
               onDelete: () => {
                 // accountOperations.delete(item.id).then((res) => {
                 // setAccount(null);
