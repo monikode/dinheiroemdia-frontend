@@ -98,6 +98,7 @@ export function Perfil() {
                 <StyledTextField
                   label="Sobrenome"
                   value={lastName}
+                  error={lastName.trim().length == 0}
                   onChange={(ev) => setLastName(ev.target.value)}
                 />
               </Grid>
@@ -112,7 +113,13 @@ export function Perfil() {
               </Grid>
 
               <Grid item xs="auto">
-                <StyledButton variant="contained" onClick={() => alterData()}>
+                <StyledButton
+                  variant="contained"
+                  onClick={() => alterData()}
+                  disabled={
+                    name.trim().length == 0 || lastName.trim().length == 0
+                  }
+                >
                   Alterar
                 </StyledButton>
               </Grid>
@@ -124,6 +131,7 @@ export function Perfil() {
             <Grid container item direction={"column"} rowSpacing={2}>
               <Grid item xs="auto">
                 <StyledTextField
+                  type="password"
                   label="Senha atual"
                   value={password}
                   onChange={(ev) => setPassword(ev.target.value)}
@@ -131,6 +139,7 @@ export function Perfil() {
               </Grid>
               <Grid item xs="auto">
                 <StyledTextField
+                  type="password"
                   label="Senha nova"
                   value={newPassword}
                   onChange={(ev) => setNewPassword(ev.target.value)}
@@ -139,6 +148,7 @@ export function Perfil() {
               <Grid item xs="auto">
                 <StyledTextField
                   label="Confirme sua senha"
+                  type="password"
                   value={passwordRepeat}
                   onChange={(ev) => setPasswordRepeat(ev.target.value)}
                 />
@@ -149,7 +159,7 @@ export function Perfil() {
                   disabled={
                     password.length == 0 ||
                     passwordRepeat !== newPassword ||
-                    newPassword.trim().length == 0
+                    newPassword.trim().length < 6
                   }
                   onClick={() => alterPassword()}
                 >
