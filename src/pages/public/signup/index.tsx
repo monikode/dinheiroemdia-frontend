@@ -11,18 +11,19 @@ import {
 } from "../../../../node_modules/react-router-dom/dist/index";
 import IconGreen from "../../../shared/assets/svg/icon_green.svg";
 
+
 export function SignUp() {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState(new Date());
+  const [birthday, setBirthday] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const navigate = useNavigate();
 
   function signUp() {
     userOperations
-      .create({ name, lastName, email, birthday }, password)
+      .create({ name, lastName, email, birthday: new Date(birthday) }, password)
       .then((res) => {
         localStorage.setItem("dd-authenticated", "true");
 
@@ -31,6 +32,20 @@ export function SignUp() {
       .catch((e) => {
         alert("nao criou");
       });
+  }
+
+  function formatDate(input:string) {
+    input = input.replace(/\D/g, '');
+
+    // Aplica a máscara: dd/mm/yyyy
+    input = input.replace(/(\d{2})(\d)/, '$1/$2');
+    input = input.replace(/(\d{2})(\d)/, '$1/$2');
+
+    // Limita a string em 10 caracteres (dd/mm/yyyy)
+    input = input.substring(0, 10);
+
+    setBirthday(input)
+
   }
   return (
     <Grid container sx={{ minHeight: "100vh" }}>
@@ -97,8 +112,10 @@ export function SignUp() {
               <StyledTextField
                 label="Data Nasc."
                 fullWidth
+                placeholder="DD/MM/YYYY"
+              
                 value={birthday}
-                onChange={(ev) => setName(ev.target.value)}
+                onChange={(ev) => formatDate(ev.target.value)}
               />
             </Grid>
           </Grid>

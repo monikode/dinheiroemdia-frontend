@@ -75,9 +75,9 @@ export function Account() {
           <Typography variant="h4"> Conta</Typography>
         </Grid>
         <Grid item>
-          <IconButton onClick={() => navigate(-1)}>
+          {/* <IconButton onClick={() => navigate(-1)}>
             <FilterListIcon color="primary"></FilterListIcon>
-          </IconButton>
+          </IconButton> */}
         </Grid>
       </Grid>
 

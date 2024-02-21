@@ -136,19 +136,19 @@ export function Dashboard() {
           <Grid item sx={{ flex: 1 }}>
             <Typography variant="h4">Suas despesas, Sr(a) {name}!</Typography>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <StyledButton variant="contained">Exportar relatório</StyledButton>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
-      <StyledCard>
+      {/* <StyledCard>
         <Box className="filter">
           <Box>Conta</Box>
           <Box>Categoria</Box>
           <Box> Data de Inicio</Box>
           <Box>Data de Fim</Box>
         </Box>
-      </StyledCard>
+      </StyledCard> */}
 
       <Box className="charts">
         <StyledCard className="spents">
