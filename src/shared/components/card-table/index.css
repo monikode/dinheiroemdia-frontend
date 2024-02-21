@@ -1,33 +1,45 @@
 .card-grid {
-    gap: 1rem;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-
-
+  gap: 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .card-grid .grid-item {
-   
 }
 
 .card-item {
-    padding: 16px 32px;
+  padding: 16px 32px;
 
-    position: relative;
-    box-sizing: border-box;
-    cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: hidden;
 }
 
+.card-item .card-content {
+  overflow: hidden;
+  position: relative;
+  /*  white-space: nowrap;
+   text-overflow: clip; */
+}
+
+.card-item .card-name {
+  white-space: nowrap;
+  max-width: 100%;
+  text-overflow: '...';
+}
+
+
 .card-item .options {
-    position: absolute;
-    right: 16px;
-    top: 16px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
 }
 
 .card-item .icon {
-    padding: 32px;
-    color: #fff;
-    border-radius: 100%;
-    overflow: visible;
+  padding: 32px;
+  color: #fff;
+  border-radius: 100%;
+  overflow: visible;
 }

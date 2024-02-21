@@ -58,15 +58,15 @@ function CardItem(item: CardItemProps) {
 
   return (
     <StyledCard className="card-item">
-      <Grid container direction="column" alignItems="center">
+      <Grid container direction="column" alignItems="center" className="card-content">
         <Grid item alignItems="center">
           <Box className="icon" sx={{ backgroundColor: item.color }}>
             {iconsList.find((value) => value.name == item.icon)?.icon}
           </Box>
         </Grid>
-        <Grid item>
+        <Grid item className="card-name">
           {" "}
-          <Typography variant="h5" textAlign="center">
+          <Typography variant="h5" textAlign="center"  >
             {item.name}
           </Typography>
         </Grid>
@@ -79,7 +79,7 @@ function CardItem(item: CardItemProps) {
         <Grid item>
           {" "}
           <Typography textAlign="center">
-            {item.percentage}% do consumo geral
+            {Math.round(item.percentage*100)/100}% do consumo geral
           </Typography>
         </Grid>
       </Grid>

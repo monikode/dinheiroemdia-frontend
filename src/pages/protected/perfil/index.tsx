@@ -168,7 +168,7 @@ export function Perfil() {
               </Grid>
             </Grid>
 
-            <Grid item xs="auto">
+            {/* <Grid item xs="auto">
               <Typography variant="h6">Conta</Typography>
             </Grid>
 
@@ -176,11 +176,8 @@ export function Perfil() {
               <StyledButton variant="contained" color="error">
                 Deletar conta
               </StyledButton>
-            </Grid>
+            </Grid> */}
 
-            {/* <Grid item xs={6} justifyContent={"flex-end"}>
-        <StyledButton sx={{marginLeft: "auto"}} variant="contained">Exportar relatório</StyledButton>
-      </Grid> */}
           </Grid>
         </StyledCard>
       </Grid>
