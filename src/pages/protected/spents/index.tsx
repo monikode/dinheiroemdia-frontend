@@ -20,7 +20,7 @@ export interface SpentFormProps {
 }
 export function SpentForm(props: SpentFormProps) {
   const [name, setName] = useState("");
-  const [value, setValue] = useState(100);
+  const [value, setValue] = useState("0");
   const [account, setAccount] = useState(parseInt(props.accountId ?? -1));
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [category, setCategory] = useState(parseInt(props.categoryId ?? "-1"));
@@ -35,7 +35,7 @@ export function SpentForm(props: SpentFormProps) {
   };
 
   const onConfirm = () => {
-    spentOperations.create(name, value, account, category).then((res) => {
+    spentOperations.create(name, parseFloat(value), account, category).then((res) => {
       props.setOpen(false);
       setName("");
       setValue(0);
@@ -61,6 +61,28 @@ export function SpentForm(props: SpentFormProps) {
       setAccounts(res.data);
     });
   }, []);
+
+  function formatMoney(valor:string) {
+    let amount = valor
+      .replaceAll(".", "")
+      .replaceAll(",", "")
+      .replace(/\D/g, "");
+
+    if (amount.length < 4) {
+      amount = "0" * (4 - amount.length) + amount;
+    } else {
+      amount = amount.replace(/^0+/, "");
+    }
+
+    let decimals = amount.slice(amount.length-2)
+    amount = amount.slice(0, amount.length-2)
+
+  
+    // Substitui o ponto decimal por vírgula
+    amount = amount + "." + decimals
+
+    return amount;
+  }
 
   return (
     <StyledDialog
@@ -104,8 +126,7 @@ export function SpentForm(props: SpentFormProps) {
         variant="outlined"
         startAdornment={<InputAdornment position="start">$</InputAdornment>}
         value={value}
-        mask={[/\d/, /\d/, ".", /\d/, /\d/]}
-        onChange={(ev) => setValue(ev.target.value)}
+        onChange={(ev) => setValue(formatMoney(ev.target.value))}
       />
     </StyledDialog>
   );
